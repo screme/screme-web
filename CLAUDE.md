@@ -47,6 +47,30 @@ clearly enough to keep current.
 
 ---
 
+## Log what you change — the Change Feed
+
+There is one shared, append-only log in Notion — *SystemOne Memory & Context Repository* →
+**📟 Change Feed** — answering "what moved since I last looked?". **Append a row when you change
+something that another party would need to know about**, and when you check a shared surface and
+find it unchanged.
+
+Two fields do the real work, and both are required:
+
+- **`Provenance`** — `Verified from source` / `Stated by owner` / `From record` / `Inference`.
+  Mark it at write time; that is the only moment it is cheap. Every documentation failure this
+  workspace has found was a hypothesis hardening into a fact because nobody recorded which it was.
+- **`Checked — no change`** is a first-class `Action`. "I looked and nothing moved" is real
+  information and appears in no derived feed — it is what stops the next agent repeating the check.
+
+**Append only.** Never edit or delete another party's row. To correct the record, append a
+superseding row; the wrong row stays visible so the next reader recognizes it on sight.
+
+When Todd states a decision to you, log it with `Actor: Todd`, `Logged by: Claude Code`.
+
+Full protocol: `docs/change-feed-protocol.md`.
+
+---
+
 ## What is in this repository
 
 Documentation only. No application code, no CI workflows, no deployment.
@@ -54,6 +78,7 @@ Documentation only. No application code, no CI workflows, no deployment.
 | Path | What it is |
 |---|---|
 | `docs/screme-agent-dossier.md` | Cold-start orientation for scre.me engineering — what was built, how it publishes, where the designs live. Mirrored to Notion under *scre.me — Platform Hub*. **Read this first** if the task touches scre.me. |
+| `docs/change-feed-protocol.md` | How the shared Change Feed works, and why Provenance and Checked—no-change are schema fields |
 | `docs/podcast-setup-2026-08-06.md` | sumyouman.com self-hosted podcast setup record |
 
 **This repository does not hold the scre.me website.** That is `screme/skills-github-pages` — see
