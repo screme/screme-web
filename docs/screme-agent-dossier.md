@@ -10,6 +10,14 @@ source — repository files, Git history, and HTTP responses from `https://scre.
 recorded document disagrees with what was observed, the disagreement is flagged in §5 and left
 unresolved. Mirrored to Notion under *scre.me — Platform Hub*.
 
+**Where this file lives, stated precisely.** It is on branch `claude/confident-feynman-vks46o`,
+open as **draft PR screme/screme-web#1** against this repo's default branch
+(`claude/sumyouman-podcast-setup-zw2lrz` — this repository has no `main`). **Until that PR is
+merged the file does not exist on the default branch**, so an agent sent to
+`screme-web/docs/screme-agent-dossier.md` on the default branch will not find it. The Notion page
+is the reliable pointer in the meantime. Flagged by ScrumMaster on its 2026-09-15 run 02 as the
+same failure mode as C-09, one repository over — and it was right to.
+
 ---
 
 ## 1. Orientation in one paragraph
