@@ -244,6 +244,20 @@ The live site's four pillars and its hero — *"Original properties for audience
 overlook"* — are a softer, more fundable register. Both are on record; the site is the newer of
 the two. The brand promise *"only those you want will hear"* is carried verbatim in both.
 
+**C-11 — sumyouman.com is not on the SpinupWP server, though the record says it is.**
+`active-memory.md` lists sumYOUman as sharing "the Hetzner/SpinupWP server (WordPress, Vice
+theme)". Response headers read on 2026-09-15 say otherwise: `sumyouman.com` returns
+`host-header: WordPress.com`, an Automattic `x-hacker` header and an `_atomic_dca` cache marker —
+it is on **WordPress.com Atomic hosting**, consistent with the independently-verified note in
+`screme-web/docs/podcast-setup-2026-08-06.md`. `scre.me` returns a bare `nginx/1.24.0 (Ubuntu)`
+from the droplet. **These are two entirely separate stacks with no server in common.** Anyone
+reasoning about sumyouman.com from `active-memory.md` will reason about the wrong host.
+
+*Clarification, since the naming invites it:* SpinupWP is a **server control panel**, not a host
+and not WordPress. It manages a VPS you own at a provider such as DigitalOcean or Hetzner. The
+site it manages here is the **static** scre.me site — `DEPLOYMENT.md` itself instructs choosing
+*"Don't install any files"* — so no WordPress is involved in the scre.me stack at any point.
+
 ---
 
 ## 6. Open items for the owner
