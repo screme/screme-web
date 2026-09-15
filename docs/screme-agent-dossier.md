@@ -29,8 +29,9 @@ is the owner-facing app for running them.
 **Live source of truth: `screme/skills-github-pages`** (default branch `main`).
 
 This is the single most important fact in this dossier, because two other repositories look like
-candidates and are not. Proof: the live `https://scre.me/` response is `Content-Length: 19982`,
-byte-for-byte identical to `index.html` in `skills-github-pages`. Served by `nginx/1.24.0 (Ubuntu)`.
+candidates and are not. **Proof (2026-09-15):** the body served at `https://scre.me/` and
+`index.html` in `skills-github-pages` are the same 19,982 bytes with the same SHA-256,
+`2b8f1df93bdd4521…` — not merely similar, identical. Served by `nginx/1.24.0 (Ubuntu)`.
 
 > The repository name is an accident of history — it began as a GitHub Pages training exercise on
 > 2026-07-14 (`README.md` still carries the exercise text and Mona the Octocat). The real site was
