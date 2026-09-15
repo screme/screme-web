@@ -69,7 +69,7 @@ When Todd states a decision to you, log it with `Actor: Todd`, `Logged by: Claud
 
 ### The bar — what gets a row, what gets a card
 
-**Proposed by ScrumMaster, 2026-09-15; unratified.** A finding gets a **Feed row and nothing
+**Proposed by ScrumMaster and ratified by Todd, 2026-09-15. In force.** A finding gets a **Feed row and nothing
 else** unless it **changes what someone does** — then, and only then, a card.
 
 The failure this prevents is not missed findings. It is a board that fills with true, correct,

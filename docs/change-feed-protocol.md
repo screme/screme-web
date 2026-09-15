@@ -97,12 +97,15 @@ it says what they left there.
 
 **All three parties append. Nobody owns the feed's contents; each party owns its own rows.**
 
-Todd has not separately confirmed this reading. Until he does, it is Claude Code's interpretation
-of his instruction — `Provenance: Inference`, and flagged here rather than assumed.
+**Still unratified — and deliberately not swept up with the rest.** On 2026-09-15 Todd ratified
+the stopping rule, the conflict-number allocator and the Feed's rolling-window filter. He did not
+name this amendment, so it remains Claude Code's interpretation of his instruction —
+`Provenance: Inference`, flagged rather than assumed. Three of four is not four, and treating a
+list as longer than it was is precisely the drift this file exists to catch.
 
 ## The bar — what gets a row, what gets a card
 
-**Proposed by ScrumMaster, 2026-09-15. Unratified — a durable coordination rule is Todd's.**
+**Proposed by ScrumMaster, 2026-09-15. Ratified by Todd the same day. In force for all parties.**
 
 > A finding gets a **Feed row and nothing else**, unless it **changes what someone does**. Then a
 > card.
@@ -245,9 +248,10 @@ a raw string, those are three surfaces, not one, and the audit under-reports.
 than an em dash, and the same spelling a previous row used. Check the newest rows for an existing
 spelling before inventing one. *Found by running the cross-check, not by reasoning about it.*
 
-**Not yet ratified.** This is a durable coordination rule and therefore Todd's to adopt, not an
-agent's. It is in force for Claude Code's own writing and recorded in the Feed with
-`Provenance: Inference` until he says otherwise.
+**Ratified by Todd, 2026-09-15.** In force for all parties. The Feed row recording its adoption
+carries `Provenance: Inference` because that was true when it was written; the ratification is a
+separate row at `Stated by owner`, rather than an edit to the first — the append-only rule applied
+to the protocol's own history.
 
 ---
 
@@ -271,8 +275,9 @@ attribution readable at a glance and filterable on its own. *Additive, not contr
 fixed ISO dates, not relative ranges, so a "past 30 days" filter would have been a hard-coded date
 that silently goes stale — precisely the failure mode this workspace keeps paying for. A sorted
 **"Newest first — read this"** view was created instead. **Notion's own UI does support a relative
-filter**; adding *When · is within · the past month* to that view is a one-click fix for Todd and
-the only outstanding piece of the spec.
+filter**, so *When · is within · the past month* was applied to that view by Todd in the UI on
+2026-09-15. **The deviation is closed** — the limit was the API's, not Notion's, and naming which
+one it was is the difference between a gap someone can close and a gap that looks permanent.
 
 ## Status against the card
 
@@ -286,5 +291,5 @@ the only outstanding piece of the spec.
 | Derived cross-check | Done — documented above, query included |
 | Backfill | Done — 2026-09-15, 19 rows |
 | ScrumMaster wired to append and to read first | Done — in its Routine prompt |
-| Rolling-window filtered view | **Partial** — API cannot express it; one click in the UI |
+| Rolling-window filtered view | **Done** — applied by Todd in the Notion UI, 2026-09-15 |
 | Registration in the Agent Memory Index | **Not mine** — ScrumMaster's lane, on its next sweep |
