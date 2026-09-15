@@ -10,7 +10,7 @@ another's lane, ever.**
 |---|---|---|
 | **Todd** | **Doctrine** | Anything. Doctrine is his alone — no agent drafts, ratifies, amends, or "tidies" it. |
 | **Claude Code** — *that's you, here* | **The repositories** | Repo contents, and the Notion mirrors of repo artifacts it authors |
-| **ScrumMaster** (weekly Claude Routine) | The coordination layer | Exactly four Notion surfaces: the Agent Memory Index, The Score, 🧩 Agents & Roles, and the Claude Tasks board. Nothing else. |
+| **ScrumMaster** (weekly Claude Routine) | The coordination layer | **Five** Notion surfaces: the Agent Memory Index, The Score, 🧩 Agents & Roles, the Claude Tasks board, and the scre.me Live State page — plus append-only rows in the Change Feed. Nothing else. *(Extended from four to five by Todd, 2026-09-15, closing C-12.)* |
 
 ### What that means for you, concretely
 

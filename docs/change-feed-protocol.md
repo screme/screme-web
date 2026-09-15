@@ -85,8 +85,9 @@ with how a decision was recorded, he appends a superseding row — he does not e
 
 ## Standing amendment to the ownership partition — needs Todd's confirmation
 
-The partition of 2026-09-15 gives ScrumMaster **four** surfaces and says "nothing else, ever."
-The Change Feed is a fifth thing it writes to.
+The partition of 2026-09-15 gives ScrumMaster a fixed allowlist of owned surfaces — **five**, since
+Todd extended it from four on 2026-09-15 to cover the scre.me Live State page (C-12). The Change
+Feed is a further thing it writes to, outside that list.
 
 This is recorded as an amendment rather than an exception, because it is a different *kind* of
 write: the partition governs **ownership of content**, and the feed is **a record of events**, with
@@ -188,7 +189,19 @@ it is a window, and the protocol says so rather than claiming a guarantee it doe
 
 ### Status
 
-**Claimed so far:** C-01 … C-12 in use; **C-13 claimed** (2026-09-15, Claude Code, unused).
+**Claimed so far:** C-01 … C-12 in use (C-12 closed 2026-09-15); **C-13 claimed** (2026-09-15,
+Claude Code, unused).
+
+### Name surfaces consistently, or the cross-check fragments
+
+Running the audit query on 2026-09-15 showed the same logical surface splitting into separate
+groups because writers spelled it differently — an em dash versus a hyphen, and Notion
+auto-linking a domain inside the text so `scre.me` became `[scre.me](http://scre.me)`. Grouped by
+a raw string, those are three surfaces, not one, and the audit under-reports.
+
+**Convention:** write `Surface` as a plain identifier — no auto-linked domains, a hyphen rather
+than an em dash, and the same spelling a previous row used. Check the newest rows for an existing
+spelling before inventing one. *Found by running the cross-check, not by reasoning about it.*
 
 **Not yet ratified.** This is a durable coordination rule and therefore Todd's to adopt, not an
 agent's. It is in force for Claude Code's own writing and recorded in the Feed with

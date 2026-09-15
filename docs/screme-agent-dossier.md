@@ -362,7 +362,7 @@ lane; no party writes in another's lane, ever.
 |---|---|---|
 | **Todd** | **Doctrine** | Anything. Doctrine is his alone — no agent drafts, ratifies, amends or "tidies" it. |
 | **Claude Code** | **The repositories** | Repo contents, and the Notion mirrors of repo artifacts it authors — **this page included** |
-| **ScrumMaster** | The coordination layer | Exactly four surfaces: Agent Memory Index, The Score, 🧩 Agents & Roles, Claude Tasks board. Nothing else, ever. |
+| **ScrumMaster** | The coordination layer | Five surfaces: Agent Memory Index, The Score, 🧩 Agents & Roles, Claude Tasks board, scre.me Live State — plus append-only Change Feed rows. Nothing else. |
 
 **This page sits in Claude Code's lane.** ScrumMaster indexes it and does not edit it; that is
 recorded on the Memory Index. Corrections to it come from a Claude Code session or from Todd.
@@ -383,10 +383,12 @@ and that property does not survive exceptions.
 
 ### Open consequence — flagged, not resolved
 
-**C-12 — ScrumMaster currently writes a fifth surface.** It created
-*scre.me — Public Site, Repo & Deployment (Live State)* on 2026-09-15 and the Memory Index records
-it as that page's writer. The partition allows four. The page is neither doctrine, nor a repo
-artifact, nor on ScrumMaster's allowlist — **it is currently unowned.** ScrumMaster has been
-instructed to stop writing to it, to flag it, and to put the options to Todd rather than resolve
-it: fold into the Index, fold into this Dossier, hand to Todd as an owned page, or extend the
-allowlist to five. **Nothing is to be deleted or migrated pending that decision.**
+**C-12 — CLOSED by owner determination, 2026-09-15.** ScrumMaster created and wrote
+*scre.me — Public Site, Repo & Deployment (Live State)*, which the partition's original four-surface
+allowlist did not cover, leaving the page unowned. Todd resolved it by **extending the allowlist
+from four surfaces to five**, the fifth being that page. ScrumMaster now owns it explicitly rather
+than by accident. Nothing was deleted or migrated.
+
+*How this record learned of it:* ScrumMaster appended the closure to the Change Feed at 09:02; this
+document was stale for roughly four minutes and was corrected from that row — **which is the feed
+doing the job it was built for**, one rung down from the problem it was built to solve.
