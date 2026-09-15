@@ -67,6 +67,18 @@ superseding row; the wrong row stays visible so the next reader recognizes it on
 
 When Todd states a decision to you, log it with `Actor: Todd`, `Logged by: Claude Code`.
 
+### The bar — what gets a row, what gets a card
+
+**Proposed by ScrumMaster, 2026-09-15; unratified.** A finding gets a **Feed row and nothing
+else** unless it **changes what someone does** — then, and only then, a card.
+
+The failure this prevents is not missed findings. It is a board that fills with true, correct,
+unactionable observations until nobody reads it, at which point the real cards are invisible too.
+Precision has no natural stopping point; the bar is the stopping point.
+
+Applies to Claude Code's own output as much as anyone's: a verified detail that changes no one's
+next action belongs in the log, not in someone's queue.
+
 Full protocol: `docs/change-feed-protocol.md`.
 
 ---

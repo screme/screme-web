@@ -100,6 +100,26 @@ it says what they left there.
 Todd has not separately confirmed this reading. Until he does, it is Claude Code's interpretation
 of his instruction — `Provenance: Inference`, and flagged here rather than assumed.
 
+## The bar — what gets a row, what gets a card
+
+**Proposed by ScrumMaster, 2026-09-15. Unratified — a durable coordination rule is Todd's.**
+
+> A finding gets a **Feed row and nothing else**, unless it **changes what someone does**. Then a
+> card.
+
+The failure this prevents is not missed findings — it is a board filling with true, correct,
+unactionable observations until nobody reads it, at which point the real cards are invisible too.
+**Precision has no natural stopping point.** The bar is the stopping point.
+
+ScrumMaster applied it to its own output first: of eight cards opened on 2026-09-15, **it judged at
+least two would not survive the test.** Claude Code is under the same bar — a verified detail that
+changes no one's next action belongs in the log, not in a queue.
+
+*Worked example, same day:* Claude Code mis-stated which option Todd took in closing C-12, calling
+it a fifth when it was the fourth listed in its own document. True correction, real record, and it
+changes nobody's next action — so it was acknowledged in conversation and **deliberately not
+logged**. The bar's first live application was to a finding about the bar.
+
 ## Where it is
 
 | | |
@@ -191,6 +211,28 @@ it is a window, and the protocol says so rather than claiming a guarantee it doe
 
 **Claimed so far:** C-01 … C-12 in use (C-12 closed 2026-09-15); **C-13 claimed** (2026-09-15,
 Claude Code, unused).
+
+### The workspace's characteristic failure is identity, not logic
+
+**ScrumMaster's diagnosis, 2026-09-15**, and it reframes every conflict on record. Count them:
+stale collection IDs (C-01), wrong repo of record (C-08), wrong mirror path (C-09), wrong host
+(C-07, C-11), and now a surface name that does not group. **Five instances in one day of the same
+underlying fault** — not one of them a reasoning error. Every one is *a name that no longer
+resolves to the thing it names.*
+
+That is worth holding onto, because it predicts where the next failure will be: not in an argument,
+in an identifier.
+
+**The structural fix, deferred by agreement.** A naming convention is the weak form — it depends on
+every writer remembering. Making `Surface` a **select or a relation** instead of free text is the
+form that cannot rot, because an unrecognized value becomes impossible rather than merely
+unlucky.
+
+*The tension to resolve before building it:* a **select** is a closed set someone must maintain,
+and surfaces appear constantly — repo paths, live services, Routine prompts — so it either blocks
+writers or grows unbounded. A **relation** to a Surfaces registry is the durable shape, but that
+registry is itself a new shared surface needing an owner, which is C-12 over again. Neither is
+obviously right, which is why it is not tonight's work.
 
 ### Name surfaces consistently, or the cross-check fragments
 
