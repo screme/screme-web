@@ -44,7 +44,8 @@ happened; `Logged at` is automatic. The gap between them is itself a quality sig
 | `Action` | Created · Updated · Superseded · Decided · Flagged · Withdrawn · **Checked — no change** |
 | `Provenance` | **Verified from source · Stated by owner · From record · Inference** |
 | `Ref` | PR, commit, page or run link |
-| `Logged at` | Automatic |
+| `Logged at` | Automatic (created time) |
+| `Supersedes` / `Superseded by` | Self-relation. Points at the entry this invalidates, and back |
 
 ### Provenance — why it is a column and not a habit
 
@@ -105,3 +106,77 @@ of his instruction — `Provenance: Inference`, and flagged here rather than ass
 | Database | *SystemOne Memory & Context Repository* → **📟 Change Feed** |
 | Seeded | 2026-09-15, backfilled with that day's 19 changes from this session's own record |
 | This protocol | `screme/screme-web` → `docs/change-feed-protocol.md` |
+
+---
+
+## The read protocol
+
+A log that is written and never read is worse than no log, because it feels like coverage.
+
+1. **On waking, read before acting.** Open the **"Newest first — read this"** view and read down
+   until you reach something you already know. That is your delta.
+2. **Record your own last-run time** somewhere durable in your own lane — a Routine prompt, a repo
+   file, a run report. The feed cannot tell you when *you* last looked.
+3. **Then act.** ScrumMaster's charter makes this step 1 of its run, explicitly so it stops
+   re-deriving what it could have read.
+
+## The derived cross-check — how the log audits itself
+
+A log is only trustworthy if you can tell when someone wrote *without* logging. Notion exposes
+`page_last_edited_at` on every page, so the check costs one comparison per surface:
+
+> For each memory surface, compare its `page_last_edited_at` against the newest Change Feed row
+> naming it in `Surface`. **A page edited more recently than its newest feed row means someone
+> wrote without logging.**
+
+The feed side of that comparison:
+
+```sql
+SELECT "Surface", MAX("date:When:start") AS newest_entry
+FROM "collection://62f4043e-3144-4d0f-bd9f-ee1d17c742e4"
+GROUP BY "Surface" ORDER BY newest_entry DESC;
+```
+
+Run it as part of any sweep. **This is an audit, not a replacement:** derivation alone cannot record
+who, why, provenance or intent, and it cannot see the repositories at all — which is exactly the
+half of the world that cost this workspace real time on 2026-09-15.
+
+---
+
+## Deviations from the specification — recorded, not buried
+
+The build differs from the card's schema in three ways. Each was deliberate; none was silent.
+
+**1. `When` is a manual date; `Logged at` is the automatic one.** The spec said `When` should be the
+created time, never set by hand. Splitting them was necessary the moment agents log Todd's
+decisions for him — a decision stated at 07:15 and written at 08:30 needs both times, or the feed
+mis-times every owner decision and every backfilled row. The automatic timestamp is preserved as
+`Logged at`, and **the gap between the two is itself a quality signal**: a large gap means a change
+was recorded late. *Deviation favouring accuracy over the spec's simplicity — worth Todd's glance.*
+
+**2. `Actor` is a third field, alongside `Logged by`.** The spec reasoned that `Logged by` plus
+`Provenance: stated-by-owner` already encodes whose decision it was. True, but it makes "every
+decision Todd made" a two-field query and leaves `Actor` implicit. An explicit `Actor` column makes
+attribution readable at a glance and filterable on its own. *Additive, not contradictory.*
+
+**3. The rolling-window view could not be built through the API.** Notion's view DSL accepts only
+fixed ISO dates, not relative ranges, so a "past 30 days" filter would have been a hard-coded date
+that silently goes stale — precisely the failure mode this workspace keeps paying for. A sorted
+**"Newest first — read this"** view was created instead. **Notion's own UI does support a relative
+filter**; adding *When · is within · the past month* to that view is a one-click fix for Todd and
+the only outstanding piece of the spec.
+
+## Status against the card
+
+| Deliverable | State |
+|---|---|
+| Database under SystemOne | Done |
+| Full schema incl. `Supersedes` self-relation | Done |
+| `Provenance` required, four values | Done |
+| `checked-no-change` as a first-class action | Done |
+| Protocol page — write and read rules | Done (this file) |
+| Derived cross-check | Done — documented above, query included |
+| Backfill | Done — 2026-09-15, 19 rows |
+| ScrumMaster wired to append and to read first | Done — in its Routine prompt |
+| Rolling-window filtered view | **Partial** — API cannot express it; one click in the UI |
+| Registration in the Agent Memory Index | **Not mine** — ScrumMaster's lane, on its next sweep |
