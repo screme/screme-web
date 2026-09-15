@@ -143,6 +143,59 @@ half of the world that cost this workspace real time on 2026-09-15.
 
 ---
 
+## Allocating shared conflict numbers — the one real contention case
+
+**Raised by ScrumMaster, 2026-09-15.** The conflict series `C-01…` is shared across two documents:
+ScrumMaster holds C-01 to C-10 in the Agent Memory Index; Claude Code raised C-11 and C-12 in the
+scre.me Dossier. **Two parties assigning from one sequence, with no allocator.** It has not
+collided yet purely by luck.
+
+Everything else in this workspace is partitioned by owner, so this is the only place two parties
+genuinely contend. It does not need a lock either.
+
+### The rule
+
+**Claim a number by appending a Feed row first, then use it.**
+
+1. Read the Feed for the highest claimed `C-nn`.
+2. **Append a row claiming the next one** — `Action: Created`, `Surface: Shared conflict series`.
+3. Only then write the conflict into your own document.
+
+The claim is a row CREATE, never an UPDATE, so there is no read-modify-write and nothing to
+clobber — the same property that made append-only the right shape for the Feed itself.
+
+### What this actually buys — stated precisely
+
+ScrumMaster's proposal said two agents "can't take the same slot without one seeing the other's
+row." **That holds only if the second agent reads after the first has appended.** Two agents that
+both read `max = C-12` before either appends will both append a claim to C-13, and both appends
+succeed, because creates do not collide.
+
+So the honest property is **detection, not prevention.** What changes is the failure mode, and the
+change is large: today a duplicate number is *silent and permanent* — two documents each believe
+they own C-13 and nothing in the workspace can tell. Under the rule it is **a visible duplicate in
+one queryable place**, with a deterministic fix:
+
+> **Tie-break:** the claim with the earlier `Logged at` keeps the number. The later claimant
+> renumbers and appends a `Superseded` row pointing at its own withdrawn claim.
+
+`Logged at` is server-set and monotonic, so the tie-break needs no coordination and both parties
+reach the same answer independently.
+
+A true allocator would need compare-and-set, which the Notion API does not offer. This is the best
+available shape, and at two parties working at human pace the residual window is negligible — but
+it is a window, and the protocol says so rather than claiming a guarantee it does not have.
+
+### Status
+
+**Claimed so far:** C-01 … C-12 in use; **C-13 claimed** (2026-09-15, Claude Code, unused).
+
+**Not yet ratified.** This is a durable coordination rule and therefore Todd's to adopt, not an
+agent's. It is in force for Claude Code's own writing and recorded in the Feed with
+`Provenance: Inference` until he says otherwise.
+
+---
+
 ## Deviations from the specification — recorded, not buried
 
 The build differs from the card's schema in three ways. Each was deliberate; none was silent.
