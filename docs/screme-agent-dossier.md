@@ -350,3 +350,43 @@ stack as the target is describing a path not taken.
 
 **Aspirational, not adopted:** enterprise-level backend infrastructure, deferred until scale
 justifies it. Not present in any current system; do not design against it.
+
+---
+
+## 9. The ownership partition — Todd's rule, 2026-09-15
+
+Stated by Todd directly. **Tier-1 authority.** Three parties write in this workspace; each has a
+lane; no party writes in another's lane, ever.
+
+| Party | Owns | May write |
+|---|---|---|
+| **Todd** | **Doctrine** | Anything. Doctrine is his alone — no agent drafts, ratifies, amends or "tidies" it. |
+| **Claude Code** | **The repositories** | Repo contents, and the Notion mirrors of repo artifacts it authors — **this page included** |
+| **ScrumMaster** | The coordination layer | Exactly four surfaces: Agent Memory Index, The Score, 🧩 Agents & Roles, Claude Tasks board. Nothing else, ever. |
+
+**This page sits in Claude Code's lane.** ScrumMaster indexes it and does not edit it; that is
+recorded on the Memory Index. Corrections to it come from a Claude Code session or from Todd.
+
+**When any party finds an error outside its lane**, it does not correct it. It flags it — as a
+conflict in a document it owns, or as a card on the board — and the owner decides. A correct edit
+in someone else's lane is still a violation, and costs more than the error it fixed: the partition
+buys exactly one property, that **the owner of a surface can trust it says what they left there**,
+and that property does not survive exceptions.
+
+### Where the rule is enforced
+
+| Party | Enforcement point |
+|---|---|
+| ScrumMaster | Its Routine prompt — rewritten 2026-09-15 with the allowlist as an absolute, and a standing instruction to report lane violations, its own included |
+| Claude Code | `CLAUDE.md` at the root of each repository. Present in `screme-web`; **not yet in `skills-github-pages` or `sumyouman-my-taken-parasite`** |
+| Todd | Nothing to enforce — he owns doctrine and may write anywhere |
+
+### Open consequence — flagged, not resolved
+
+**C-12 — ScrumMaster currently writes a fifth surface.** It created
+*scre.me — Public Site, Repo & Deployment (Live State)* on 2026-09-15 and the Memory Index records
+it as that page's writer. The partition allows four. The page is neither doctrine, nor a repo
+artifact, nor on ScrumMaster's allowlist — **it is currently unowned.** ScrumMaster has been
+instructed to stop writing to it, to flag it, and to put the options to Todd rather than resolve
+it: fold into the Index, fold into this Dossier, hand to Todd as an owned page, or extend the
+allowlist to five. **Nothing is to be deleted or migrated pending that decision.**
