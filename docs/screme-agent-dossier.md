@@ -207,23 +207,26 @@ built and what was hardened), and `ip-schedule.md`.
 
 ## 5. Conflicts — flagged, not resolved
 
-**C-07 (extends the flag ScrumMaster raised on 2026-09-15).** The governing question was whether
-Hetzner/SpinupWP was abandoned for DigitalOcean, or whether both exist for different properties.
+**C-07 — CLOSED by owner determination, 2026-09-15.** The question was whether Hetzner/SpinupWP
+was abandoned for DigitalOcean, or whether both exist for different properties.
 
-**The evidence says: both exist, and their coexistence is the defect, not the answer.**
+**Todd's answer, stated directly and recorded here as authoritative:** *"Hetzner/SpinupWP is old
+data, which we selected against proceeding with."* scre.me runs on **DigitalOcean droplets**.
+Hetzner and SpinupWP were evaluated and declined. `DEPLOYMENT.md` in
+`sumyouman-my-taken-parasite` is therefore **superseded, not parallel** — it documents a path that
+was never adopted, and no agent should provision from it.
 
-- `sumyouman-my-taken-parasite/DEPLOYMENT.md` describes Hetzner + SpinupWP + Namecheap, deploying
-  that repo's `public/` via SpinupWP Git deployment. It is **still live enough to overwrite the
-  production web root** — that is precisely the 2026-09-01 outage.
-- `skills-github-pages/.github/workflows/deploy-droplet.yml` is the current, verified path:
-  GitHub Actions → rsync over SSH → nginx droplet.
-- Both point at the same server. The runbook is not merely stale; it is an **active second writer**.
+**One operational question survives the closure, and it is not about branding.** The deploy
+workflow's comments record, on 2026-09-01, a **second writer** replacing the droplet's web root —
+four times, the last of which deleted rather than overlaid and returned 404s across the site.
+Whatever panel or hook that writer belonged to, what matters is whether **anything other than the
+GitHub Actions workflow can still write to that web root.**
 
-*Inference, not fact:* SpinupWP is a server control panel that manages droplets on several
-providers including DigitalOcean, so "SpinupWP" and "DigitalOcean droplet" are not necessarily
-contradictory — the panel may simply be managing a DO droplet rather than a Hetzner one. Whether
-the underlying server ever moved from Hetzner to DigitalOcean was **not verified** and is not
-asserted here.
+*This cannot be settled from outside the server, and the green deploy history does not settle it:*
+the six-hourly drift guard rsyncs and re-verifies on every run, so it would **repair drift and
+report success**, making a live second writer and a removed one look identical from here. What is
+verifiable: the last 12 scheduled runs (2026-09-12 → 2026-09-15) all succeeded, no deploy has
+failed since the guard was added, and the live site is correct as of 2026-09-15 06:53 UTC.
 
 **C-08 — the repo of record is recorded wrong in three places.** The Platform Hub names
 `sumyouman-my-taken-parasite` as the deploy repo. ScrumMaster's Live State page names `screme-web`.
@@ -244,19 +247,18 @@ The live site's four pillars and its hero — *"Original properties for audience
 overlook"* — are a softer, more fundable register. Both are on record; the site is the newer of
 the two. The brand promise *"only those you want will hear"* is carried verbatim in both.
 
-**C-11 — sumyouman.com is not on the SpinupWP server, though the record says it is.**
-`active-memory.md` lists sumYOUman as sharing "the Hetzner/SpinupWP server (WordPress, Vice
-theme)". Response headers read on 2026-09-15 say otherwise: `sumyouman.com` returns
-`host-header: WordPress.com`, an Automattic `x-hacker` header and an `_atomic_dca` cache marker —
-it is on **WordPress.com Atomic hosting**, consistent with the independently-verified note in
-`screme-web/docs/podcast-setup-2026-08-06.md`. `scre.me` returns a bare `nginx/1.24.0 (Ubuntu)`
-from the droplet. **These are two entirely separate stacks with no server in common.** Anyone
-reasoning about sumyouman.com from `active-memory.md` will reason about the wrong host.
+**C-11 — CLOSED by owner determination, 2026-09-15.** `active-memory.md` lists sumYOUman as
+sharing "the Hetzner/SpinupWP server (WordPress, Vice theme)". That line is **wrong**, and the
+owner has confirmed the correct arrangement (see §8). Headers read on 2026-09-15 agree:
+`sumyouman.com` returns `host-header: WordPress.com` with an Automattic `x-hacker` header and an
+`_atomic_dca` cache marker; `scre.me` returns a bare `nginx/1.24.0 (Ubuntu)`. **Two separate
+stacks, no server in common.** The `active-memory.md` line remains uncorrected at source — it is
+an indexed document, flagged here rather than edited.
 
-*Clarification, since the naming invites it:* SpinupWP is a **server control panel**, not a host
-and not WordPress. It manages a VPS you own at a provider such as DigitalOcean or Hetzner. The
-site it manages here is the **static** scre.me site — `DEPLOYMENT.md` itself instructs choosing
-*"Don't install any files"* — so no WordPress is involved in the scre.me stack at any point.
+*Clarification, since the naming invites the error:* SpinupWP is a **server control panel**, not a
+host and not WordPress. It manages a VPS rented elsewhere. It has no relationship to
+WordPress.com, which is a managed platform run by Automattic. Nothing about the scre.me stack
+involves WordPress at any point — it is eleven static HTML files and a folder of assets.
 
 ---
 
@@ -289,3 +291,24 @@ These require authenticated consoles no agent holds. None is blocked on engineer
 | Notion — Live State | *scre.me — Public Site, Repo & Deployment (Live State)* |
 | Notion — Memory Index | *SystemOne — Agent Memory Index* |
 | Bruce / SF Eagle lineage | Notion — *🤖 Bruce — SF Eagle Phone Agent (ElevenLabs)* |
+
+---
+
+## 8. Infrastructure topology — owner determination, 2026-09-15
+
+Stated directly by Todd and recorded as authoritative. This supersedes any conflicting
+description in older documents, which are flagged in §5 rather than corrected at source.
+
+| Property | Host | Registrar | Notes |
+|---|---|---|---|
+| **scre.me** | DigitalOcean droplet, nginx | Namecheap | Static site, published by GitHub Actions (§3) |
+| **sumyouman.com** | WordPress.com Pro Business | **WordPress.com** | Custom **ViceDrk** theme; media-rich and complex. Host *and* registrar — the platform's model effectively requires full integration to work well, so the domain sits with them deliberately. **This exception applies to sumyouman.com only.** |
+| **All other domains** | — | Namecheap | Namecheap is the domain repository of record |
+
+**Email and identity:** Google Workspace — Gmail and Google Apps.
+
+**Declined:** Hetzner + SpinupWP. Evaluated, not proceeded with. Any document describing that
+stack as the target is describing a path not taken.
+
+**Aspirational, not adopted:** enterprise-level backend infrastructure, deferred until scale
+justifies it. Not present in any current system; do not design against it.
