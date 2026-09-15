@@ -117,6 +117,33 @@ investors.
 | Variable | `DROPLET_USER` | Defaults to `root` |
 | Variable | `DROPLET_WEBROOT` | Optional — auto-detected when unset |
 
+### The droplet itself — verified from deploy logs, 2026-09-15
+
+Read from run 64 of the deploy workflow (06:44 UTC), which prints what it finds:
+
+| Fact | Value |
+|---|---|
+| Host | `143.198.130.132` — DigitalOcean |
+| OS | Ubuntu 24.04 (`OpenSSH_9.6p1 Ubuntu-3ubuntu13.19`) |
+| Web server | `nginx/1.24.0 (Ubuntu)` |
+| Web root (auto-detected by probe) | **`/var/www/screme/public`** |
+| Deploy user | `root` |
+| Payload | 11 HTML files + 8 assets, 363,496 bytes; verify step passed |
+
+**This is not a SpinupWP-managed server.** SpinupWP's convention is `/sites/<domain>/files/`, and
+this project's own `DEPLOYMENT.md` confirms that shape by citing
+`/sites/scre.me/files/briefing-requests.jsonl`. The live server uses a conventional
+`/var/www/…` layout and accepts `root` over SSH, which SpinupWP disables in favour of per-site
+users. A conventional Ubuntu + nginx droplet, in other words — consistent with the owner's
+statement that the SpinupWP path was declined.
+
+*Limit of this evidence:* it is inferred from directory layout and login user, not from logging in
+and inspecting for a control-panel agent. It rules out the specific SpinupWP Git-deployment
+writer; it does not by itself prove that no other writer (a cron, another CI) exists.
+
+*Noted in passing, not a finding:* deploys run as `root` with a key held in repository secrets.
+Workable, but a dedicated deploy user owning only the web root would be the smaller blast radius.
+
 ### Why the drift guard exists — read this before touching deployment
 
 The six-hourly schedule is not belt-and-braces; it is scar tissue. The workflow's own comments
@@ -216,17 +243,17 @@ Hetzner and SpinupWP were evaluated and declined. `DEPLOYMENT.md` in
 `sumyouman-my-taken-parasite` is therefore **superseded, not parallel** — it documents a path that
 was never adopted, and no agent should provision from it.
 
-**One operational question survives the closure, and it is not about branding.** The deploy
-workflow's comments record, on 2026-09-01, a **second writer** replacing the droplet's web root —
-four times, the last of which deleted rather than overlaid and returned 404s across the site.
-Whatever panel or hook that writer belonged to, what matters is whether **anything other than the
-GitHub Actions workflow can still write to that web root.**
+**The operational follow-up is now answered too.** The question was whether anything besides the
+GitHub Actions workflow can still write to the droplet's web root — specifically the SpinupWP Git
+deployment named in the 2026-09-01 incident log. Deploy-log evidence (§3, *The droplet itself*)
+shows the live server is a conventional Ubuntu + nginx droplet at `/var/www/screme/public`, not a
+SpinupWP-managed one. **The 2026-09-01 second writer is not present on the server serving scre.me
+today.** The incident log is history, not a live condition — most plausibly a record of the
+transition off the declined SpinupWP path, though that sequencing is inference, not established.
 
-*This cannot be settled from outside the server, and the green deploy history does not settle it:*
-the six-hourly drift guard rsyncs and re-verifies on every run, so it would **repair drift and
-report success**, making a live second writer and a removed one look identical from here. What is
-verifiable: the last 12 scheduled runs (2026-09-12 → 2026-09-15) all succeeded, no deploy has
-failed since the guard was added, and the live site is correct as of 2026-09-15 06:53 UTC.
+*Residual, and small:* this rules out the SpinupWP writer by the server's shape; it does not prove
+no other writer exists. The last 12 scheduled runs (2026-09-12 → 2026-09-15) all succeeded and the
+live site was correct at 06:53 UTC on 2026-09-15.
 
 **C-08 — the repo of record is recorded wrong in three places.** The Platform Hub names
 `sumyouman-my-taken-parasite` as the deploy repo. ScrumMaster's Live State page names `screme-web`.
@@ -266,10 +293,13 @@ involves WordPress at any point — it is eleven static HTML files and a folder 
 
 These require authenticated consoles no agent holds. None is blocked on engineering.
 
-1. **Disable the SpinupWP Git deployment** on the scre.me site. Until then, every merge in
-   `sumyouman-my-taken-parasite` is a scre.me outage.
+1. ~~Disable the SpinupWP Git deployment.~~ **Resolved** — the live droplet is not SpinupWP-managed
+   (§3). No action needed. The standing "treat any merge in `sumyouman-my-taken-parasite` as an
+   outage" rule in the workflow comments is now stale and can be retired next time that file is
+   touched.
 2. **Confirm the DigitalOcean droplet inventory** — count, sizes, regions, attached resources.
-   Project console: `5c6da413-24b7-4e57-b100-cd8cee6f0ec0`.
+   Project console: `5c6da413-24b7-4e57-b100-cd8cee6f0ec0`. The scre.me droplet itself is now
+   identified (§3); what else sits in that project is not.
 3. **Reconcile the deployment runbook** — `DEPLOYMENT.md` should either be superseded by the
    droplet workflow or scoped explicitly to a different property.
 4. **Decide the FirstCall / Venue Agents altitude.** Todd states FirstCall is Bruce productized;
