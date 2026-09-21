@@ -295,11 +295,36 @@ host and not WordPress. It manages a VPS rented elsewhere. It has no relationshi
 WordPress.com, which is a managed platform run by Automattic. Nothing about the scre.me stack
 involves WordPress at any point — it is eleven static HTML files and a folder of assets.
 
+**C-13 — ScrumMaster's Routine prompt still says four surfaces.** Todd extended ScrumMaster's
+allowlist from four surfaces to five on 2026-09-15, adding the scre.me Live State page and
+closing C-12. The Routine record has not been modified since **`2026-09-15T08:24:26Z`**, and its
+prompt still reads *"Exactly four surfaces,"* still lists four, and still carries a section
+headed *"Consequence you must handle on your next run"* instructing ScrumMaster to stop writing
+to the Live State page and open a card for a decision Todd has already made.
+
+*On the timing, precisely:* the Feed row recording the extension carries `When` = 09:02 UTC but
+was itself created at 08:45:21 UTC. A row cannot precede the event it records, so 09:02 is a
+narrative timestamp, not an observed one, and **08:45:21 is the hard upper bound on when the
+decision was made.** The prompt therefore predates the extension by *at least* 21 minutes — and
+has stood unrevised through the six days since. The exact gap is not established and does not
+need to be; the ordering is what carries the conflict.
+
+ScrumMaster runs memoryless. The prompt is the whole of what it knows at the start of a run, so
+this does not decay quietly: every future Monday it will orient itself to a four-surface
+partition and re-raise a closed question. Its own Change Feed row records the extension, but a
+row it has not read yet cannot correct a prompt it is already running under.
+
+**Verified from source 2026-09-21** by reading the Routine record directly (`updated_at`, prompt
+text, allowlist of four) and both timestamps on the extension row. **Flagged, not fixed** — the
+Routine's configuration is not this agent's lane, and a prompt is rewritten only when Todd asks
+for it.
+
 ---
 
 ## 6. Open items for the owner
 
-These require authenticated consoles no agent holds. None is blocked on engineering.
+These wait on the owner — most on authenticated consoles no agent holds, one (item 6) on his
+explicit say-so rather than on access. None is blocked on engineering.
 
 1. ~~Disable the SpinupWP Git deployment.~~ **Resolved** — the live droplet is not SpinupWP-managed
    (§3). No action needed. The standing "treat any merge in `sumyouman-my-taken-parasite` as an
@@ -314,6 +339,10 @@ These require authenticated consoles no agent holds. None is blocked on engineer
    the site presents FirstCall as the owner's console and the character agent under Venue Agents.
    A reader currently has to guess which is the product.
 5. **Choose the native stack for FirstCall** — `handoff.md` is complete and waiting.
+6. **Update ScrumMaster's Routine prompt to five surfaces** (C-13). The prompt predates your
+   2026-09-15 extension and still orders a card for the decision that extension made. This one is
+   not console-bound — an agent can edit it with `update_trigger` — but a Routine's prompt is
+   rewritten only on your explicit say-so, so it waits on you.
 
 ---
 
