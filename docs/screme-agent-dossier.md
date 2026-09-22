@@ -406,7 +406,7 @@ and that property does not survive exceptions.
 
 | Party | Enforcement point |
 |---|---|
-| ScrumMaster | Its Routine prompt — rewritten 2026-09-15 with the allowlist as an absolute, and a standing instruction to report lane violations, its own included |
+| ScrumMaster | Its Routine prompt — carries the allowlist as an absolute, and a standing instruction to report lane violations, its own included. **But the prompt still says four surfaces, not five — see C-13.** The enforcement point is real; its content is out of date. |
 | Claude Code | `CLAUDE.md` at the root of each repository. Present in `screme-web`; **not yet in `skills-github-pages` or `sumyouman-my-taken-parasite`** |
 | Todd | Nothing to enforce — he owns doctrine and may write anywhere |
 
@@ -418,6 +418,12 @@ allowlist did not cover, leaving the page unowned. Todd resolved it by **extendi
 from four surfaces to five**, the fifth being that page. ScrumMaster now owns it explicitly rather
 than by accident. Nothing was deleted or migrated.
 
-*How this record learned of it:* ScrumMaster appended the closure to the Change Feed at 09:02; this
-document was stale for roughly four minutes and was corrected from that row — **which is the feed
-doing the job it was built for**, one rung down from the problem it was built to solve.
+*How this record learned of it:* ScrumMaster appended the closure to the Change Feed, and this
+document was corrected from that row rather than from a sweep — **which is the feed doing the job
+it was built for**, one rung down from the problem it was built to solve.
+
+*A caution about that row's timestamps, added 2026-09-21:* it carries `When` = 09:02 but was
+created at 08:45:21. A row cannot precede the event it records, so `When` here is narrative and
+only `Logged at` is observed. An earlier draft of this section quoted 09:02 as fact and derived a
+four-minute staleness window from it; both are withdrawn. **When a Feed row's two timestamps
+disagree, `Logged at` is the evidence and `When` is the author's account of it.**
