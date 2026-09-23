@@ -298,7 +298,8 @@ involves WordPress at any point — it is eleven static HTML files and a folder 
 **C-13 — CLOSED by owner action, 2026-09-23.** On Todd's instruction, Claude Code amended the
 Routine prompt to the five-surface allowlist and replaced the stale *"Consequence you must handle
 on your next run"* section with a note that C-12 is settled (record `updated_at`
-`2026-09-23T07:59:39Z`). The unratified Change Feed amendment was left marked unconfirmed. What
+`2026-09-23T07:59:39Z`). The Change Feed amendment, then unratified, was left marked unconfirmed; Todd ratified it later
+the same day. What
 follows is the conflict as it was raised.
 
 *As raised:* **ScrumMaster's Routine prompt still said four surfaces.** Todd extended ScrumMaster's

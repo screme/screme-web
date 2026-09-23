@@ -7,7 +7,7 @@ Repository*, answering the single question no surface in this workspace could an
 Sort by `When` descending, read until you recognize something. That's the answer.
 
 **Specified by Todd, 2026-09-15.** This file documents the mechanism and lives in Claude Code's
-lane. The append-only *rule* is his; see "Standing amendment" below.
+lane. The append-only *rule* is his; see "The Change Feed amendment" below.
 
 ---
 
@@ -83,7 +83,7 @@ all his, and none would have appeared.
 The two-field split is what keeps it honest: the row never claims Todd wrote it. If he disagrees
 with how a decision was recorded, he appends a superseding row — he does not edit the agent's.
 
-## Standing amendment to the ownership partition — needs Todd's confirmation
+## The Change Feed amendment to the ownership partition — ratified by Todd, 2026-09-23
 
 The partition of 2026-09-15 gives ScrumMaster a fixed allowlist of owned surfaces — **five**, since
 Todd extended it from four on 2026-09-15 to cover the scre.me Live State page (C-12). The Change
@@ -97,11 +97,15 @@ it says what they left there.
 
 **All three parties append. Nobody owns the feed's contents; each party owns its own rows.**
 
-**Still unratified — and deliberately not swept up with the rest.** On 2026-09-15 Todd ratified
-the stopping rule, the conflict-number allocator and the Feed's rolling-window filter. He did not
-name this amendment, so it remains Claude Code's interpretation of his instruction —
-`Provenance: Inference`, flagged rather than assumed. Three of four is not four, and treating a
-list as longer than it was is precisely the drift this file exists to catch.
+**Ratified by Todd, 2026-09-23. In force.** Appending Change Feed rows does not breach any
+party's allowlist, ScrumMaster's included: the partition's *"nothing else, ever"* governs surfaces,
+and the feed is not one.
+
+*How it got here, since the gap was deliberate:* on 2026-09-15 Todd ratified the stopping rule, the
+conflict-number allocator and the Feed's rolling-window filter — three rules — and did not name
+this one. It stayed recorded as Claude Code's interpretation (`Provenance: Inference`), and
+ScrumMaster surfaced it as unconfirmed in every run report, for eight days, until he ratified it by
+name. Three of four was not four, and nobody treated it as four.
 
 ## The bar — what gets a row, what gets a card
 
