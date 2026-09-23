@@ -295,7 +295,13 @@ host and not WordPress. It manages a VPS rented elsewhere. It has no relationshi
 WordPress.com, which is a managed platform run by Automattic. Nothing about the scre.me stack
 involves WordPress at any point — it is eleven static HTML files and a folder of assets.
 
-**C-13 — ScrumMaster's Routine prompt still says four surfaces.** Todd extended ScrumMaster's
+**C-13 — CLOSED by owner action, 2026-09-23.** On Todd's instruction, Claude Code amended the
+Routine prompt to the five-surface allowlist and replaced the stale *"Consequence you must handle
+on your next run"* section with a note that C-12 is settled (record `updated_at`
+`2026-09-23T07:59:39Z`). The unratified Change Feed amendment was left marked unconfirmed. What
+follows is the conflict as it was raised.
+
+*As raised:* **ScrumMaster's Routine prompt still said four surfaces.** Todd extended ScrumMaster's
 allowlist from four surfaces to five on 2026-09-15, adding the scre.me Live State page and
 closing C-12. The Routine record has not been modified since **`2026-09-15T08:24:26Z`**, and its
 prompt still reads *"Exactly four surfaces,"* still lists four, and still carries a section
@@ -323,8 +329,7 @@ for it.
 
 ## 6. Open items for the owner
 
-These wait on the owner — most on authenticated consoles no agent holds, one (item 6) on his
-explicit say-so rather than on access. None is blocked on engineering.
+These wait on authenticated consoles no agent holds. None is blocked on engineering.
 
 1. ~~Disable the SpinupWP Git deployment.~~ **Resolved** — the live droplet is not SpinupWP-managed
    (§3). No action needed. The standing "treat any merge in `sumyouman-my-taken-parasite` as an
@@ -339,10 +344,8 @@ explicit say-so rather than on access. None is blocked on engineering.
    the site presents FirstCall as the owner's console and the character agent under Venue Agents.
    A reader currently has to guess which is the product.
 5. **Choose the native stack for FirstCall** — `handoff.md` is complete and waiting.
-6. **Update ScrumMaster's Routine prompt to five surfaces** (C-13). The prompt predates your
-   2026-09-15 extension and still orders a card for the decision that extension made. This one is
-   not console-bound — an agent can edit it with `update_trigger` — but a Routine's prompt is
-   rewritten only on your explicit say-so, so it waits on you.
+6. ~~Update ScrumMaster's Routine prompt to five surfaces~~ **Done 2026-09-23** on Todd's
+   instruction (C-13, closed).
 
 ---
 
@@ -406,7 +409,7 @@ and that property does not survive exceptions.
 
 | Party | Enforcement point |
 |---|---|
-| ScrumMaster | Its Routine prompt — carries the allowlist as an absolute, and a standing instruction to report lane violations, its own included. **But the prompt still says four surfaces, not five — see C-13.** The enforcement point is real; its content is out of date. |
+| ScrumMaster | Its Routine prompt — carries the allowlist as an absolute, and a standing instruction to report lane violations, its own included. Brought to five surfaces 2026-09-23 on Todd's instruction (C-13, closed) — it had lagged his decision by eight days. |
 | Claude Code | `CLAUDE.md` at the root of each repository. Present in `screme-web`; **not yet in `skills-github-pages` or `sumyouman-my-taken-parasite`** |
 | Todd | Nothing to enforce — he owns doctrine and may write anywhere |
 
