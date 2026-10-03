@@ -2,13 +2,13 @@
 
 ## The ownership partition — read this before writing anything
 
-**Stated by Todd Colletti on 2026-09-15. This is his rule, not an agent's; treat it as tier-1
+**Stated by Todd Colletti on 2026-09-15. This is Todd's rule, not an agent's; treat it as tier-1
 authority.** Three parties write in this workspace. Each has a lane. **No party writes in
 another's lane, ever.**
 
 | Party | Owns | May write |
 |---|---|---|
-| **Todd** | **Doctrine** | Anything. Doctrine is his alone — no agent drafts, ratifies, amends, or "tidies" it. |
+| **Todd** | **Doctrine** | Anything. Doctrine is Todd's alone — no agent drafts, ratifies, amends, or "tidies" it. |
 | **Claude Code** — *that's you, here* | **The repositories** | Repo contents, and the Notion mirrors of repo artifacts it authors |
 | **ScrumMaster** (weekly Claude Routine) | The coordination layer | **Five** Notion surfaces: the Agent Memory Index, The Score, 🧩 Agents & Roles, the Claude Tasks board, and the scre.me Live State page — plus append-only rows in the Change Feed. Nothing else. *(Extended from four to five by Todd, 2026-09-15, closing C-12.)* |
 
