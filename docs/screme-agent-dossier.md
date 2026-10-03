@@ -74,10 +74,16 @@ Stylesheets: `assets/screme.css` (site), `assets/nocturne.css` (design system),
 
 ### Standing engineering policy
 
-**No external requests.** Inter is self-hosted, React is vendored locally, and image assets in the
-prototypes are drawn SVG scenes encoded as `data:` URIs rather than files. This is deliberate — an
-outage at a CDN cannot blank the site, and there is no third-party beacon on a page shown to
-investors.
+**External requests — the intent is none; the site does not meet it.** *Corrected 2026-10-03.*
+An earlier version of this section said Inter was self-hosted. **It is not.** Rendering the live
+pages shows every one of the eleven loading Google Fonts (a `<link>` for Space Grotesk and
+Unbounded, and an `@import` for Inter in `assets/nocturne.css`), and `live-demo.html` loading
+Phosphor icons from unpkg. React *is* local, and the prototypes' imagery *is* inline SVG.
+
+*How the wrong claim got here:* it was copied from `sumyouman-my-taken-parasite/docs/technical-framework.md`,
+which records fonts being self-hosted in **that** repository's `public/` copy — the retired one.
+The change never reached `skills-github-pages`. A record about one repository was read as a fact
+about another: the C-08 failure, inside this document. Self-hosting is Todd's call; it is not done.
 
 ### Build timeline (from Git history)
 
@@ -178,10 +184,20 @@ symptom.
 > **The fix:** SpinupWP → the scre.me site → Git deployment → **disable**. This is an owner action
 > in an authenticated console; no agent has performed it as of 2026-09-15.
 
-**Both quoted lines above are retired — kept as history, not as instructions.** The live droplet
-is not SpinupWP-managed (*The droplet itself*, above), so there is no SpinupWP Git deployment to
-disable and a merge in `sumyouman-my-taken-parasite` is no longer an outage on scre.me. The
-workflow's own comments still carry the rule; retire them the next time that file is touched.
+**⛔ The standing rule above is LIVE. A merge in `sumyouman-my-taken-parasite` is an outage here.**
+*Corrected 2026-10-03.* This document said on 2026-09-15 — and again earlier on 2026-10-03 — that
+the second writer was gone and the rule retired. **Both were wrong.** On **2026-09-27**, a Claude
+session watching on a one-minute poll recorded PR #6 merging in `sumyouman-my-taken-parasite` at
+05:06:22 UTC and the scre.me web root being replaced at **05:06:55** — the fourth overwrite
+(`skills-github-pages` commit `64a55b1`, which also moved the drift guard from six-hourly to
+**hourly**). Six more merges landed in that repository between 2026-09-30 and 2026-10-01; whether
+each caused an outage is not on record.
+
+The earlier conclusion was an inference from the server's directory layout (*The droplet itself*
+shows `/var/www/screme/public`, not SpinupWP's `/sites/<domain>/files`). It ruled out one *shape*
+of writer and was then read as ruling out *any*. **The mechanism of the writer is still unknown** —
+the 09-27 session attributes it to the SpinupWP Git deployment; this record has not confirmed that.
+What is measured is the effect. **Finding and disconnecting it is §6 item 1.**
 
 ### eagle.scre.me — the FirstCall patron app, on the same droplet
 
@@ -196,7 +212,7 @@ workflow's own comments still carry the rule; retire them the next time that fil
 | **Source** | `screme/sumyouman-my-taken-parasite`, `main`, under `apps/firstcall/`. **Proven by content match:** the live `/legal/terms/`, `/legal/privacy/` and `/manifest.webmanifest` are byte-identical to `apps/firstcall/web/public/` once CRLF line endings are normalized — the CRLFs are the fingerprint of the deploy below. Last commit to `apps/firstcall` was `2b3b8dc` at 2026-10-01 10:27:05Z; every live file carries `Last-Modified` 10:29:22Z. |
 | **Deploy path** | **No CI.** `apps/firstcall/deploy/deploy.ps1`, run by hand on a Windows PC: `npm ci` → `npm run check` → `npm run build` → `scp` to `root@scre.me:/tmp/firstcall-deploy` → `setup.sh` on the droplet, interactive. |
 | **Targets on the droplet** | Web: **`/var/www/eagle`** (`cp -r`, no delete). API: `/opt/firstcall-api` as systemd `firstcall-api`. nginx site `/etc/nginx/sites-available/eagle.scre.me`; optional basic-auth review mode in `/etc/nginx/eagle-review.d/`. |
-| **Overlap with scre.me's deploy** | **No shared directory.** scre.me writes `/var/www/screme/public`; eagle writes `/var/www/eagle`. |
+| **Overlap with scre.me's deploy** | **`deploy.ps1` shares no directory with it.** scre.me writes `/var/www/screme/public`; eagle writes `/var/www/eagle`. **But this same repository is what the unexplained second writer pulls into scre.me's web root on every merge to `main`** (above) — so the repo does reach scre.me, just not through this script. |
 
 **But one interaction is real, and one is latent** — read from the workflow code, not observed:
 
@@ -295,7 +311,12 @@ Hetzner and SpinupWP were evaluated and declined. `DEPLOYMENT.md` in
 `sumyouman-my-taken-parasite` is therefore **superseded, not parallel** — it documents a path that
 was never adopted, and no agent should provision from it.
 
-**The operational follow-up is now answered too.** The question was whether anything besides the
+**⛔ The operational follow-up below was answered WRONGLY — superseded 2026-10-03.** A measured
+overwrite on 2026-09-27 shows the second writer is live (§3). The hosting decision C-07 records —
+DigitalOcean, not Hetzner/SpinupWP — stands; only this follow-up is withdrawn. Kept as written so
+the error is recognizable:
+
+~~**The operational follow-up is now answered too.**~~ The question was whether anything besides the
 GitHub Actions workflow can still write to the droplet's web root — specifically the SpinupWP Git
 deployment named in the 2026-09-01 incident log. Deploy-log evidence (§3, *The droplet itself*)
 shows the live server is a conventional Ubuntu + nginx droplet at `/var/www/screme/public`, not a
@@ -377,10 +398,12 @@ for it.
 These wait on the owner — consoles no agent holds, or settings that are Todd's to change. None is
 blocked on engineering.
 
-1. ~~Disable the SpinupWP Git deployment.~~ **Resolved** — the live droplet is not SpinupWP-managed
-   (§3). No action needed. The standing "treat any merge in `sumyouman-my-taken-parasite` as an
-   outage" rule in the workflow comments is now stale and can be retired next time that file is
-   touched.
+1. **⛔ Find and disconnect the second writer.** *Reopened 2026-10-03* — it was marked resolved on
+   2026-09-15 on an inference that a 2026-09-27 measurement disproved (§3). Every merge to `main` in
+   `sumyouman-my-taken-parasite` overwrites scre.me for up to an hour. Look first where the 09-27
+   session points — the SpinupWP dashboard, the scre.me site, its Git deployment — and if nothing is
+   there, on the droplet for a webhook, cron job or `git pull` service targeting
+   `/var/www/screme/public`. **Until it is gone, batch merges in that repository.**
 2. **Confirm the DigitalOcean droplet inventory** — count, sizes, regions, attached resources.
    Project console: `5c6da413-24b7-4e57-b100-cd8cee6f0ec0`. The scre.me droplet itself is now
    identified (§3); what else sits in that project is not.
