@@ -178,6 +178,44 @@ symptom.
 > **The fix:** SpinupWP → the scre.me site → Git deployment → **disable**. This is an owner action
 > in an authenticated console; no agent has performed it as of 2026-09-15.
 
+**Both quoted lines above are retired — kept as history, not as instructions.** The live droplet
+is not SpinupWP-managed (*The droplet itself*, above), so there is no SpinupWP Git deployment to
+disable and a merge in `sumyouman-my-taken-parasite` is no longer an outage on scre.me. The
+workflow's own comments still carry the rule; retire them the next time that file is touched.
+
+### eagle.scre.me — the FirstCall patron app, on the same droplet
+
+*Verified from source 2026-10-01 and 2026-10-03 by Claude Code, except where marked.*
+
+`eagle.scre.me` resolves to `143.198.130.132` — **the scre.me droplet** — and answers as the same
+`nginx/1.24.0 (Ubuntu)`. It is the SF Eagle patron app (class code `BRUC`) plus its API under
+`/v1`. It is a second property on one box, which is why no infrastructure record noticed it arrive.
+
+| | |
+|---|---|
+| **Source** | `screme/sumyouman-my-taken-parasite`, `main`, under `apps/firstcall/`. **Proven by content match:** the live `/legal/terms/`, `/legal/privacy/` and `/manifest.webmanifest` are byte-identical to `apps/firstcall/web/public/` once CRLF line endings are normalized — the CRLFs are the fingerprint of the deploy below. Last commit to `apps/firstcall` was `2b3b8dc` at 2026-10-01 10:27:05Z; every live file carries `Last-Modified` 10:29:22Z. |
+| **Deploy path** | **No CI.** `apps/firstcall/deploy/deploy.ps1`, run by hand on a Windows PC: `npm ci` → `npm run check` → `npm run build` → `scp` to `root@scre.me:/tmp/firstcall-deploy` → `setup.sh` on the droplet, interactive. |
+| **Targets on the droplet** | Web: **`/var/www/eagle`** (`cp -r`, no delete). API: `/opt/firstcall-api` as systemd `firstcall-api`. nginx site `/etc/nginx/sites-available/eagle.scre.me`; optional basic-auth review mode in `/etc/nginx/eagle-review.d/`. |
+| **Overlap with scre.me's deploy** | **No shared directory.** scre.me writes `/var/www/screme/public`; eagle writes `/var/www/eagle`. |
+
+**But one interaction is real, and one is latent** — read from the workflow code, not observed:
+
+- *Real, harmless:* scre.me's web-root probe (§3, step 4) writes and then deletes a probe file in
+  every directory under `/var/www` holding an `index.html`. Sorted, **`/var/www/eagle` is probed
+  first** — on every scre.me deploy and every six-hourly drift-guard run.
+- *Latent, not harmless — `Inference`:* if the probe ever fails to match, the workflow falls back
+  to *"the first `root` directive in `sites-enabled`"*. That directory now holds eagle's site too,
+  and `grep -r` file order is unspecified. If it lands on `/var/www/eagle`, the rsync overwrites
+  **eagle's `index.html` with scre.me's landing page** — and the verify step still **passes**,
+  because scre.me itself is untouched and still serves the hero string. Silent breakage of the one
+  property with a live pilot.
+- **The fix is one repository variable:** set `DROPLET_WEBROOT=/var/www/screme/public` on
+  `skills-github-pages`. It skips both the probe and the fallback. See §6.
+
+**LIVE-01 was real.** The legal pages first entered the repository in `f7b0816`, 2026-10-01
+06:48Z — *"Terms and Privacy pages, so first run's links stop 404ing."* The 2026-09-26 Codex review
+reporting 404s was correct; the 2026-10-01 deploy fixed it.
+
 ---
 
 ## 4. Where the designs and demos live
@@ -195,9 +233,15 @@ administrative app, and the source of truth for a native build.
 | `FirstCall-Demo.dc.html` | The original demo canvas — explainer beside a phone frame |
 | `README.md` | How the canvas relates to the live web demo |
 
-**What FirstCall is.** An ElevenLabs conversational agent answers a venue's inbound line over
-Twilio VOIP, carrying that venue's own personality and operating protocol. FirstCall is the
-**mobile app venue management runs it from**: tune each room's personality, edit the knowledge the
+**What FirstCall is — Todd's product definition, 2026-09-15.** FirstCall is **one product**: the
+venue call agent, the cloud service behind it, and the operator mobile app, together. It ships in
+**four editions by operational domain** — Proprietor's, Portfolio, Enterprise-Collection,
+Enterprise-Corporation. The site and `handoff.md` do not say this yet; that is open on the board
+as its own card, gated on whether the editions are public before pricing settles.
+
+The design record in this folder is the **operator app** component. An ElevenLabs conversational
+agent answers a venue's inbound line over Twilio VOIP, carrying that venue's own personality and
+operating protocol; the app is what venue management runs it from: tune each room's personality, edit the
 agent may answer from, set what it must never handle alone, work the queue of what it could not
 close, and manage numbers, routing, plan, notifications, team and branding — across several venues
 under one parent group.
@@ -330,7 +374,8 @@ for it.
 
 ## 6. Open items for the owner
 
-These wait on authenticated consoles no agent holds. None is blocked on engineering.
+These wait on the owner — consoles no agent holds, or settings that are Todd's to change. None is
+blocked on engineering.
 
 1. ~~Disable the SpinupWP Git deployment.~~ **Resolved** — the live droplet is not SpinupWP-managed
    (§3). No action needed. The standing "treat any merge in `sumyouman-my-taken-parasite` as an
@@ -341,12 +386,15 @@ These wait on authenticated consoles no agent holds. None is blocked on engineer
    identified (§3); what else sits in that project is not.
 3. **Reconcile the deployment runbook** — `DEPLOYMENT.md` should either be superseded by the
    droplet workflow or scoped explicitly to a different property.
-4. **Decide the FirstCall / Venue Agents altitude.** Todd states FirstCall is Bruce productized;
-   the site presents FirstCall as the owner's console and the character agent under Venue Agents.
-   A reader currently has to guess which is the product.
+4. ~~Decide the FirstCall / Venue Agents altitude.~~ **Decided 2026-09-15:** one product, four
+   editions (§4). Carrying that onto the site is a board card, waiting on one call — whether the
+   editions are public yet.
 5. **Choose the native stack for FirstCall** — `handoff.md` is complete and waiting.
 6. ~~Update ScrumMaster's Routine prompt to five surfaces~~ **Done 2026-09-23** on Todd's
    instruction (C-13, closed).
+7. **Set `DROPLET_WEBROOT=/var/www/screme/public`** on `skills-github-pages` (Settings → Secrets
+   and variables → Actions → Variables). Closes the latent fallback that could overwrite
+   eagle.scre.me (§3). A repository setting, not a code change — yours to authorize.
 
 ---
 
