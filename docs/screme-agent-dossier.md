@@ -50,8 +50,8 @@ candidates and are not. **Proof (2026-09-15):** the body served at `https://scre
 | Page | Role |
 |---|---|
 | `index.html` | Landing. Four-pillar thesis, three-stage plan (Wedge / Engine / Upside) |
-| `venue-agents.html` | The product. Character-led voice agents; design-partner program |
-| `firstcall.html` | FirstCall — the owner's app. Full interactive prototype |
+| `venue-agents.html` | **FirstCall**, the product: character-led voice agents, the four editions, design-partner program |
+| `firstcall.html` | The FirstCall **operator app**, Portfolio edition. Full interactive prototype |
 | `live-demo.html` | Three interactive demos in one page (see §4) |
 | `platform.html` | The orchestrator, described precisely |
 | `territories.html` | Eight territories, one active |
@@ -414,7 +414,8 @@ blocked on engineering.
    droplet workflow or scoped explicitly to a different property.
 4. ~~Decide the FirstCall / Venue Agents altitude.~~ **Decided 2026-09-15:** one product, four
    editions (§4). Todd approved the editions going public on 2026-10-03;
-   the site change is `skills-github-pages#13`, the design record `sumyouman-my-taken-parasite#16`.
+   the site change, `skills-github-pages#13`, is **live since 2026-10-05 05:31Z**; the design record
+   waits on `sumyouman-my-taken-parasite#16`, held because a merge there is an outage (§3).
 5. **Choose the native stack for FirstCall** — `handoff.md` is complete and waiting.
 6. ~~Update ScrumMaster's Routine prompt to five surfaces~~ **Done 2026-09-23** on Todd's
    instruction (C-13, closed).
