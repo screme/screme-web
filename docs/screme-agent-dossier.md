@@ -415,9 +415,10 @@ blocked on engineering.
 5. **Choose the native stack for FirstCall** — `handoff.md` is complete and waiting.
 6. ~~Update ScrumMaster's Routine prompt to five surfaces~~ **Done 2026-09-23** on Todd's
    instruction (C-13, closed).
-7. **Set `DROPLET_WEBROOT=/var/www/screme/public`** on `skills-github-pages` (Settings → Secrets
-   and variables → Actions → Variables). Closes the latent fallback that could overwrite
-   eagle.scre.me (§3). A repository setting, not a code change — yours to authorize.
+7. ~~Set `DROPLET_WEBROOT=/var/www/screme/public`~~ **Done 2026-10-05** — as the workflow's default
+   rather than a repository variable (this agent's proxy refuses the Actions settings API), via
+   `skills-github-pages#12`, merged 05:31Z. The fallback that could overwrite eagle.scre.me (§3) no
+   longer runs. A repository variable would still override the default.
 
 ---
 
