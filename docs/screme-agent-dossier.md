@@ -195,6 +195,13 @@ session watching on a one-minute poll recorded PR #6 merging in `sumyouman-my-ta
 **hourly**). Six more merges landed in that repository between 2026-09-30 and 2026-10-01; whether
 each caused an outage is not on record.
 
+**Measured again 2026-10-05 — the fifth overwrite.** `sumyouman-my-taken-parasite#16` merged at
+09:49:16 UTC. On a 20-second poll, scre.me served this repository's `main` byte-for-byte until the
+web root was replaced at **09:51:02** (`Last-Modified`), 1 min 46 s after the merge. It was replaced
+with the retired design export: a different homepage, and `venue-agents`, `live-demo`, `investors`,
+`rights`, `community`, `press` and all four stylesheets returned 404. Todd's manual dispatch of the
+deploy workflow (run 297, started 09:56:44) restored it at **09:57:26**. **Outage: 6 min 24 s.**
+
 The earlier conclusion was an inference from the server's directory layout (*The droplet itself*
 shows `/var/www/screme/public`, not SpinupWP's `/sites/<domain>/files`). It ruled out one *shape*
 of writer and was then read as ruling out *any*. **The mechanism of the writer is still unknown** —
@@ -414,7 +421,8 @@ blocked on engineering.
 4. ~~Decide the FirstCall / Venue Agents altitude.~~ **Decided 2026-09-15:** one product, four
    editions (§4). Todd approved the editions going public on 2026-10-03;
    the site change, `skills-github-pages#13`, is **live since 2026-10-05 05:31Z**; the design record
-   waits on `sumyouman-my-taken-parasite#16`, held because a merge there is an outage (§3).
+   followed in `sumyouman-my-taken-parasite#16`, merged 2026-10-05 09:49Z, at the cost of the
+   6-minute outage measured in §3.
 5. **Choose the native stack for FirstCall** — `handoff.md` is complete and waiting.
 6. ~~Update ScrumMaster's Routine prompt to five surfaces~~ **Done 2026-09-23** on Todd's
    instruction (C-13, closed).
@@ -486,7 +494,7 @@ and that property does not survive exceptions.
 | Party | Enforcement point |
 |---|---|
 | ScrumMaster | Its Routine prompt — carries the allowlist as an absolute, and a standing instruction to report lane violations, its own included. Brought to five surfaces 2026-09-23 on Todd's instruction (C-13, closed) — it had lagged Todd's decision by eight days. |
-| Claude Code | `CLAUDE.md` at the root of each repository. Present in `screme-web` and `skills-github-pages` (merged 2026-10-05); in `sumyouman-my-taken-parasite` it waits on PR #16, held because a merge there is an outage (§3) |
+| Claude Code | `CLAUDE.md` at the root of each repository. Present in all three: `screme-web` and `skills-github-pages` (merged 2026-10-05 05:31Z) and `sumyouman-my-taken-parasite` (PR #16, merged 2026-10-05 09:49Z, which caused the outage measured in §3) |
 | Todd | Nothing to enforce — Todd owns doctrine and may write anywhere |
 
 ### Open consequence — flagged, not resolved
