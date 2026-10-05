@@ -24,8 +24,8 @@ same failure mode as C-09, one repository over — and it was right to.
 
 scre.me is the **thesis property** in Todd Colletti's portfolio: an AI-augmented IP orchestration
 company whose public site is itself the showcase artifact. The site was designed in **Claude
-Design** and built and hardened in **Claude Code**. It is a static, self-contained site — no CDN,
-no external fonts, no third-party runtime requests — of eleven pages plus two substantial
+Design** and built and hardened in **Claude Code**. It is a static site — no build step, no CDN-hosted
+app code, though it does load Google Fonts and one icon stylesheet (§2) — of eleven pages plus two substantial
 interactive prototypes. It publishes to an **nginx droplet** via **GitHub Actions**. The
 commercial wedge it sells is **character-led voice agents for hospitality venues**; **FirstCall**
 is the owner-facing app for running them.
@@ -106,12 +106,15 @@ about another: the C-08 failure, inside this document. Self-hosting is Todd's ca
 ### The path
 
 1. **Triggers** — push to `main` touching `*.html`, `assets/**`, or the workflow itself; a
-   six-hourly schedule (`17 */6 * * *`); or manual `workflow_dispatch`. Concurrency group
+   schedule (six-hourly at first; **hourly since 2026-09-27**, see §3 *Why the drift guard exists*);
+   or manual `workflow_dispatch`. Concurrency group
    `deploy-droplet`, cancel-in-progress.
 2. **Gate** — the job is skipped entirely unless the `DROPLET_HOST` repository *variable* is set,
    so the workflow is inert rather than broken in a fork.
 3. **SSH** — private key from the `DROPLET_SSH_KEY` *secret*; host key pinned via `ssh-keyscan`.
-4. **Web-root detection** — *behavioral, not guessed*. If `DROPLET_WEBROOT` is unset, the workflow
+4. **Web root — pinned since 2026-10-05** to `/var/www/screme/public` as the workflow's default
+   (`skills-github-pages#12`); a `DROPLET_WEBROOT` variable overrides it. *What follows is the
+   detection the pin replaced, which still runs only if the default is removed:* the workflow
    writes a uniquely-named probe file into every candidate directory under `/var/www`, `/srv` and
    `/usr/share/nginx` that contains an `index.html`, then asks nginx over HTTPS which one it
    actually serves. Probes are deleted immediately. Falls back to the first `root` directive in
@@ -129,7 +132,7 @@ about another: the C-08 failure, inside this document. Self-hosting is Todd's ca
 | Secret | `DROPLET_SSH_KEY` | Private key with droplet access |
 | Variable | `DROPLET_HOST` | **Required** — the job skips without it |
 | Variable | `DROPLET_USER` | Defaults to `root` |
-| Variable | `DROPLET_WEBROOT` | Optional — auto-detected when unset |
+| Variable | `DROPLET_WEBROOT` | Optional — overrides the pinned default `/var/www/screme/public` (since 2026-10-05) |
 
 ### The droplet itself — verified from deploy logs, 2026-09-15
 
@@ -410,8 +413,8 @@ blocked on engineering.
 3. **Reconcile the deployment runbook** — `DEPLOYMENT.md` should either be superseded by the
    droplet workflow or scoped explicitly to a different property.
 4. ~~Decide the FirstCall / Venue Agents altitude.~~ **Decided 2026-09-15:** one product, four
-   editions (§4). Carrying that onto the site is a board card, waiting on one call — whether the
-   editions are public yet.
+   editions (§4). Todd approved the editions going public on 2026-10-03;
+   the site change is `skills-github-pages#13`, the design record `sumyouman-my-taken-parasite#16`.
 5. **Choose the native stack for FirstCall** — `handoff.md` is complete and waiting.
 6. ~~Update ScrumMaster's Routine prompt to five surfaces~~ **Done 2026-09-23** on Todd's
    instruction (C-13, closed).
@@ -465,7 +468,7 @@ lane; no party writes in another's lane, ever.
 
 | Party | Owns | May write |
 |---|---|---|
-| **Todd** | **Doctrine** | Anything. Doctrine is his alone — no agent drafts, ratifies, amends or "tidies" it. |
+| **Todd** | **Doctrine** | Anything. Doctrine is Todd's alone — no agent drafts, ratifies, amends or "tidies" it. |
 | **Claude Code** | **The repositories** | Repo contents, and the Notion mirrors of repo artifacts it authors — **this page included** |
 | **ScrumMaster** | The coordination layer | Five surfaces: Agent Memory Index, The Score, 🧩 Agents & Roles, Claude Tasks board, scre.me Live State — plus append-only Change Feed rows. Nothing else. |
 
@@ -482,9 +485,9 @@ and that property does not survive exceptions.
 
 | Party | Enforcement point |
 |---|---|
-| ScrumMaster | Its Routine prompt — carries the allowlist as an absolute, and a standing instruction to report lane violations, its own included. Brought to five surfaces 2026-09-23 on Todd's instruction (C-13, closed) — it had lagged his decision by eight days. |
-| Claude Code | `CLAUDE.md` at the root of each repository. Present in `screme-web`; **not yet in `skills-github-pages` or `sumyouman-my-taken-parasite`** |
-| Todd | Nothing to enforce — he owns doctrine and may write anywhere |
+| ScrumMaster | Its Routine prompt — carries the allowlist as an absolute, and a standing instruction to report lane violations, its own included. Brought to five surfaces 2026-09-23 on Todd's instruction (C-13, closed) — it had lagged Todd's decision by eight days. |
+| Claude Code | `CLAUDE.md` at the root of each repository. Present in `screme-web` and `skills-github-pages` (merged 2026-10-05); in `sumyouman-my-taken-parasite` it waits on PR #16, held because a merge there is an outage (§3) |
+| Todd | Nothing to enforce — Todd owns doctrine and may write anywhere |
 
 ### Open consequence — flagged, not resolved
 
