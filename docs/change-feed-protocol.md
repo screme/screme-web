@@ -161,9 +161,15 @@ The feed side of that comparison:
 
 ```sql
 SELECT "Surface", MAX("date:When:start") AS newest_entry
-FROM "collection://62f4043e-3144-4d0f-bd9f-ee1d17c742e4"
+FROM "collection://3ea6b3d7-13b8-8355-aedd-871046561e8d"
 GROUP BY "Surface" ORDER BY newest_entry DESC;
 ```
+
+*Data source ID current since the 2026-10-06 move to the screme-space workspace (previously
+`62f4043e-3144-4d0f-bd9f-ee1d17c742e4`). The move reset every page's `page_last_edited_at` to
+2026-10-06 ~17:52–17:55Z and every row's `Logged at` to 17:53Z, so for the first sweep after it,
+treat edits at that time as the move, not as unlogged writes. Original `Logged at` values and the
+old→new ID map: `screme/systemone` → `ops/notion-migration-2026-10-06.json`.*
 
 Run it as part of any sweep. **This is an audit, not a replacement:** derivation alone cannot record
 who, why, provenance or intent, and it cannot see the repositories at all — which is exactly the
