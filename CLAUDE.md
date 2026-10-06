@@ -11,6 +11,16 @@ another's lane, ever.**
 | **Todd** | **Doctrine** | Anything. Doctrine is Todd's alone — no agent drafts, ratifies, amends, or "tidies" it. |
 | **Claude Code** — *that's you, here* | **The repositories** | Repo contents, and the Notion mirrors of repo artifacts it authors |
 | **ScrumMaster** (weekly Claude Routine) | The coordination layer | **Five** Notion surfaces: the Agent Memory Index, The Score, 🧩 Agents & Roles, the Claude Tasks board, and the scre.me Live State page — plus append-only rows in the Change Feed. Nothing else. *(Extended from four to five by Todd, 2026-09-15, closing C-12.)* |
+| **Codex** *(added by Todd, 2026-10-05: LANES-SYSTEMONE)* | Design and drafting for the SystemOne continuity project | `codex/*` pull requests only. No Notion writes, no main merges, no ratification |
+| **Claude Design** *(added by Todd, 2026-10-06: LANE-CLAUDE-DESIGN, closing C-15)* | **The design lane** | Its own Claude Design projects, the design-record pages it authors under the scre.me Dossier, and append-only Change Feed rows. Nothing else. Not the Dossier's own text, which is yours |
+
+*The two rows above were added after Todd's 2026-09-15 statement, by his later ratified decisions; the
+three-party sentence is his original wording, kept as stated. Canonical text: Protocols & Policies,
+`LANES-SYSTEMONE` and `LANE-CLAUDE-DESIGN`, ratified by hash in `screme/systemone`.*
+
+**Claude Design's boundary that matters to you:** a design is a proposal. Anything that becomes a record
+of fact — what is live, what was decided, what something costs — is filed by you or by Todd, never by
+Claude Design. When its handoff proposes memory rows, you write them.
 
 ### What that means for you, concretely
 
