@@ -1,5 +1,17 @@
 # screme-web — working agreement
 
+## SystemOne initialization — first, every session
+
+SystemOne initialization contract: INIT-SYSTEMONE v1.0.
+Live entry: https://app.notion.com/p/2f86b3d713b8824fb60e815ea822efd0
+Canonical contract: https://app.notion.com/p/3f56b3d713b881b79629d4eadba37b8c
+Initialize once, load only applicable governing sources, act within your assigned lane and isolate blockers to dependent actions. If Notion is unavailable, use an accessible authorized self-contained handoff; state the access gap and continue independent work. Do not infer authority, write permission or transfer permission from this snippet.
+
+*The text above is the rollout's snippet, word for word (`screme/systemone`
+`handoffs/initialization-rollout-v1.md`), with the canonical page filled in. Your lane is
+the Claude Code row of the partition below. If Notion is unavailable, the full contract
+and the ratified texts are in `screme/systemone`.*
+
 ## The ownership partition — read this before writing anything
 
 **Stated by Todd Colletti on 2026-09-15. This is Todd's rule, not an agent's; treat it as tier-1
